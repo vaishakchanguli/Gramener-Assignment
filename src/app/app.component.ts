@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { fromEvent, Observable } from 'rxjs';
+import { fromEvent, Observable, OperatorFunction } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import {
   debounceTime,
@@ -7,7 +7,8 @@ import {
   filter,
   map,
   switchMap,
-  tap
+  tap,
+  catchError
 } from 'rxjs/operators';
 import { DataService } from './data.service';
 
@@ -17,8 +18,29 @@ import { DataService } from './data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private weatherResults = '';
+  weatherResults = '';
+   model: any;
+  searching = false;
+  searchFailed = false;
+
   constructor(private dataService: DataService) {}
+
+search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.dataService.search(term).pipe(
+          tap(() => this.searchFailed = false),
+          catchError(() => {
+            this.searchFailed = true;
+            return of([]);
+          }))
+      ),
+      tap(() => this.searching = false)
+    )
+
 
   ngAfterViewInit() {
     console.log('initial');

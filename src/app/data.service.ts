@@ -7,9 +7,18 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   public getWeatherData(searchText) {
-    let uri = `${searchText}`;
+    let uri = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${
+      this.API_KEY
+    }&q=${searchText}`;
     console.log('in service' + searchText);
     debugger;
+    return this.http.get<any>(uri);
+  }
+
+  public search(searchText) {
+    let uri = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${
+      this.API_KEY
+    }&q=${searchText}`;
     return this.http.get<any>(uri);
   }
 }
