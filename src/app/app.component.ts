@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { fromEvent, Observable, OperatorFunction } from 'rxjs';
+import { fromEvent, Observable, OperatorFunction,of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import {
   debounceTime,
