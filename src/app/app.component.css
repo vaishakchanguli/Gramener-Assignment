@@ -1,7 +1,6 @@
 p {
   font-family: Lato;
 }
-
 .card {
   width: 12rem;
   margin: 8px;
@@ -9,6 +8,7 @@ p {
 .card-body {
   text-align: center;
 }
+
 ngb-typeahead-window {
   width: 75%;
 }

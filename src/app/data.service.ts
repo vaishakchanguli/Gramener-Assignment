@@ -18,8 +18,6 @@ export class DataService {
     let uri = `https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${key}?apikey=${
       this.API_KEY
     }`;
-    console.log('in service' + key);
-    debugger;
     return this.http.get<any>(uri);
   }
 
@@ -27,6 +25,6 @@ export class DataService {
     let uri = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${
       this.API_KEY
     }&q=${searchText}`;
-    return this.http.get<any>(uri).pipe(take(10));
+    return this.http.get<any[]>(uri).pipe(take(10));
   }
 }
