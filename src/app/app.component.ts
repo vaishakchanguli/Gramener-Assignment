@@ -1,6 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { fromEvent, Observable, OperatorFunction,of } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
+import { Observable, OperatorFunction,of } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,  
