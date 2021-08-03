@@ -9,4 +9,6 @@ p {
 .card-body {
   text-align: center;
 }
-
+ngb-typeahead-window {
+  width: 75%;
+}

@@ -3,9 +3,7 @@ import { fromEvent, Observable, OperatorFunction,of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import {
   debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
+  distinctUntilChanged,  
   switchMap,
   tap,
   catchError
@@ -22,6 +20,8 @@ export class AppComponent {
   model: any;
   searching = false;
   searchFailed = false;
+currentDate= new Date();
+location = '';
 
   constructor(private dataService: DataService) {}
 
@@ -32,7 +32,7 @@ search: OperatorFunction<string,  readonly {LocalizedName}[]> = (text$: Observab
       tap(() => this.searching = true),
       switchMap(term =>
         this.dataService.search(term).pipe(
-          tap(() => this.searchFailed = false),
+          tap(() => this.searchFailed = false),          
           catchError(() => {
             this.searchFailed = true;
             return of([]);
@@ -44,6 +44,7 @@ search: OperatorFunction<string,  readonly {LocalizedName}[]> = (text$: Observab
   formatter = (x:{LocalizedName: string}) =>  x.LocalizedName;
 
 onItemSelection(event){
+  this.location = event.item.LocalizedName;
  this.dataService.getWeatherData(event.item.Key).subscribe((response)=>{
     this.results = response;
  })

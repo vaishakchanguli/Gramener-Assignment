@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { fromEvent, Observable, OperatorFunction, of } from 'rxjs';
+import { take } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
@@ -27,6 +27,6 @@ export class DataService {
     let uri = `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${
       this.API_KEY
     }&q=${searchText}`;
-    return this.http.get<any>(uri);
+    return this.http.get<any>(uri).pipe(take(10));
   }
 }

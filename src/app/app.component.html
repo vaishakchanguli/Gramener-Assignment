@@ -1,17 +1,9 @@
-<!-- <input
-  class="form-control w-75"
-  type="text"
-  placeholder="Search"
-  aria-label="Search"
-  id="search-box"
-/> -->
-
 <ng-template #rt let-r="result" let-t="term">
   <ngb-highlight [result]="r.LocalizedName" [term]="t"></ngb-highlight>
   <br />
   <small>{{r.Country.LocalizedName}}</small>
 </ng-template>
-<div class="row" style="position:relative">
+<div class="w-75" style="position:relative">
   <input
     id="typeahead-weather"
     type="text"
@@ -29,7 +21,12 @@
     Sorry, suggestions could not be loaded.
   </div>
 </div>
-<!-- {{elements?.[0].name}} -->
+<br />
+
+<h3 *ngIf="results.length">
+  Report for {{location}} on {{currentDate | date}}
+</h3>
+
 <div class="row">
   <ng-container *ngFor="let item of results">
     <div class="card" style="width: 10rem;">
