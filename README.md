@@ -16,3 +16,8 @@ Bootstrap and ng-bootstrap is used to design the UI controls
 API:
 API's are used form https://developer.accuweather.com/ domain.
 2 API's used to implement the weather report app.
+
+NOTE: There is a daily limit on API calls usage form https://developer.accuweather.com. If it's not working i request you to visit this application the next day.
+
+
+#Vaishak
