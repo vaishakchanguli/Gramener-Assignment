@@ -3,3 +3,7 @@
 body {
   margin: 16px;
 }
+
+div#ngb-live {
+  display: none !important;
+}

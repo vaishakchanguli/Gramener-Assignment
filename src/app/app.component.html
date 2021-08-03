@@ -11,31 +11,44 @@
   <br />
   <small>{{r.Country.LocalizedName}}</small>
 </ng-template>
-
-<input
-  id="typeahead-weather"
-  type="text"
-  class="form-control mx-sm-3"
-  [class.is-invalid]="searchFailed"
-  [(ngModel)]="model"
-  [ngbTypeahead]="search"
-  [inputFormatter]="formatter"
-  [resultTemplate]="rt"
-  placeholder="Search Cities"
-  (selectItem)="onItemSelection($event)"
-/>
-<small *ngIf="searching" class="form-text text-muted">searching...</small>
-<div class="invalid-feedback" *ngIf="searchFailed">
-  Sorry, suggestions could not be loaded.
-</div>
-
-<ng-container></ng-container>
-<div class="card" style="width: 10rem;">
-  <img [src]="'../assets/11.png'" class="card-img-top" alt="" />
-  <div class="card-body">
-    <p class="card-text">
-      "IconPhrase": "Mostly cloudy",
-    </p>
-    <small>Temperature 77</small>
+<div class="row" style="position:relative">
+  <input
+    id="typeahead-weather"
+    type="text"
+    class="form-control w-75"
+    [class.is-invalid]="searchFailed"
+    [(ngModel)]="model"
+    [ngbTypeahead]="search"
+    [inputFormatter]="formatter"
+    [resultTemplate]="rt"
+    placeholder="Search Cities"
+    (selectItem)="onItemSelection($event)"
+  />
+  <small *ngIf="searching" class="form-text text-muted">searching...</small>
+  <div class="invalid-feedback" *ngIf="searchFailed">
+    Sorry, suggestions could not be loaded.
   </div>
+</div>
+<!-- {{elements?.[0].name}} -->
+<div class="row">
+  <ng-container *ngFor="let item of results">
+    <div class="card" style="width: 10rem;">
+      <img
+        src="{{'assets/'+ item.WeatherIcon+'.png'}}"
+        class="card-img-top"
+        alt=""
+      />
+      <div class="card-body">
+        <p class="card-text">
+          {{item.IconPhrase}}
+        </p>
+        <p>{{item.DateTime | date: 'HH:mm'}}</p>
+        <small
+          >Temperature {{item.Temperature.Value}}
+          {{item.Temperature.Unit}}</small
+        >
+      </div>
+    </div>
+  </ng-container>
+  <div></div>
 </div>

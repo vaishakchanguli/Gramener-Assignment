@@ -18,8 +18,8 @@ import { DataService } from './data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  weatherResults = '';
-   model: any;
+  results = [];
+  model: any;
   searching = false;
   searchFailed = false;
 
@@ -44,6 +44,8 @@ search: OperatorFunction<string,  readonly {LocalizedName}[]> = (text$: Observab
   formatter = (x:{LocalizedName: string}) =>  x.LocalizedName;
 
 onItemSelection(event){
-console.log(event)
+ this.dataService.getWeatherData(event.item.Key).subscribe((response)=>{
+    this.results = response;
+ })
 }
 }
