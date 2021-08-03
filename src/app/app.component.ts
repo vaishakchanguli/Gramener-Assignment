@@ -25,14 +25,14 @@ export class AppComponent {
 
   constructor(private dataService: DataService) {}
 
-search: OperatorFunction<string,  readonly {name, country, key}[]> = (text$: Observable<string>) =>
+search: OperatorFunction<string,  readonly {LocalizedName}[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       tap(() => this.searching = true),
       switchMap(term =>
         this.dataService.search(term).pipe(
-          tap(() => {this.searchFailed = false; console.log('here')}),
+          tap(() => this.searchFailed = false),
           catchError(() => {
             this.searchFailed = true;
             return of([]);
@@ -41,22 +41,9 @@ search: OperatorFunction<string,  readonly {name, country, key}[]> = (text$: Obs
       tap(() => this.searching = false)
     )
 
-  formatter = (x:{name: string}) => {x.name};
+  formatter = (x:{LocalizedName: string}) =>  x.LocalizedName;
 
-  ngAfterViewInit() {
-    console.log('initial');
-    const searchBox = document.getElementById('search-box') as HTMLInputElement;
-    debugger;
-    const typeahead = fromEvent(searchBox, 'input')
-      .pipe(
-        map(e => (e.target as HTMLInputElement).value),
-        filter(text => text.length > 2),
-        debounceTime(10),
-        distinctUntilChanged(),
-        switchMap(searchTerm => this.dataService.getWeatherData(searchTerm))
-      )
-      .subscribe(response => {
-        console.log('response');
-      });
-  }
+onItemSelection(event){
+console.log(event)
+}
 }

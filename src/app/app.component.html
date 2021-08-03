@@ -1,21 +1,28 @@
-<input
+<!-- <input
   class="form-control w-75"
   type="text"
   placeholder="Search"
   aria-label="Search"
   id="search-box"
-/>
+/> -->
+
+<ng-template #rt let-r="result" let-t="term">
+  <ngb-highlight [result]="r.LocalizedName" [term]="t"></ngb-highlight>
+  <br />
+  <small>{{r.Country.LocalizedName}}</small>
+</ng-template>
 
 <input
   id="typeahead-http"
   type="text"
   class="form-control mx-sm-3"
-  [
-  class.is-invalid]="searchFailed"
+  [class.is-invalid]="searchFailed"
   [(ngModel)]="model"
   [ngbTypeahead]="search"
   [inputFormatter]="formatter"
+  [resultTemplate]="rt"
   placeholder="Search Cities"
+  (selectItem)="onItemSelection($event)"
 />
 <small *ngIf="searching" class="form-text text-muted">searching...</small>
 <div class="invalid-feedback" *ngIf="searchFailed">
