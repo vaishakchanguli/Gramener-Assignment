@@ -6,7 +6,18 @@
   id="search-box"
 />
 
- <input id="typeahead-http" type="text" class="form-control mx-sm-3" [
- class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="Search Cities" />
-    <small *ngIf="searching" class="form-text text-muted">searching...</small>
-    <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+<input
+  id="typeahead-http"
+  type="text"
+  class="form-control mx-sm-3"
+  [
+  class.is-invalid]="searchFailed"
+  [(ngModel)]="model"
+  [ngbTypeahead]="search"
+  [inputFormatter]="formatter"
+  placeholder="Search Cities"
+/>
+<small *ngIf="searching" class="form-text text-muted">searching...</small>
+<div class="invalid-feedback" *ngIf="searchFailed">
+  Sorry, suggestions could not be loaded.
+</div>

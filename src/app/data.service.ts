@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { fromEvent, Observable, OperatorFunction, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
@@ -16,9 +17,12 @@ export class DataService {
   }
 
   public search(searchText) {
-    let uri = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${
+    let uri = `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${
       this.API_KEY
     }&q=${searchText}`;
-    return this.http.get<any>(uri);
+    //return this.http.get<any>(uri).pipe(
+    //map(()=>{}));
+    console.log('here');
+    return of([{ name: 'man', country: 'india', key: 122 }]);
   }
 }

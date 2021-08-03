@@ -25,14 +25,14 @@ export class AppComponent {
 
   constructor(private dataService: DataService) {}
 
-search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
+search: OperatorFunction<string,  readonly {name, country, key}[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       tap(() => this.searching = true),
       switchMap(term =>
         this.dataService.search(term).pipe(
-          tap(() => this.searchFailed = false),
+          tap(() => {this.searchFailed = false; console.log('here')}),
           catchError(() => {
             this.searchFailed = true;
             return of([]);
@@ -41,6 +41,7 @@ search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>
       tap(() => this.searching = false)
     )
 
+  formatter = (x:{name: string}) => {x.name};
 
   ngAfterViewInit() {
     console.log('initial');
