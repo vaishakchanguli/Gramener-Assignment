@@ -12,3 +12,7 @@ p {
 ngb-typeahead-window {
   width: 75%;
 }
+
+section {
+  margin: 16px 16px 0 16px;
+}

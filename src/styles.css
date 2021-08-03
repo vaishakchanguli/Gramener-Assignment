@@ -1,7 +1,7 @@
 /* Add application styles & imports to this file! */
 @import '~bootstrap/dist/css/bootstrap.min.css';
-body {
-  margin: 16px;
+* {
+  margin: 0;
 }
 
 div#ngb-live {
