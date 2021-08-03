@@ -14,11 +14,11 @@ export class DataService {
       .set('Access-Control-Expose-Headers', 'Content-Length');
   }
 
-  public getWeatherData(searchText) {
-    let uri = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${
+  public getWeatherData(key) {
+    let uri = `https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${key}?apikey=${
       this.API_KEY
-    }&q=${searchText}`;
-    console.log('in service' + searchText);
+    }`;
+    console.log('in service' + key);
     debugger;
     return this.http.get<any>(uri);
   }
