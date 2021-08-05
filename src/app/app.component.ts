@@ -24,7 +24,7 @@ location = '';
 
   constructor(private dataService: DataService) {}
 
-search: OperatorFunction<string,  readonly {LocalizedName}[]> = (text$: Observable<string>) =>
+search: OperatorFunction<string,  readonly {LocalizedName:string}[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
